@@ -1,0 +1,4 @@
+3 features
+- button to change skin
+- particle effect that changes color w the current skin
+- jump (space bar)
