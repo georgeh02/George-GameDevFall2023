@@ -7,7 +7,10 @@ public class Plot : MonoBehaviour
     [Header("References")]
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Color hoverColor;
-    
+    [SerializeField] private GameObject MessagePrefab;
+    [SerializeField] private Transform canvas;
+
+
     private GameObject tower;
     private Color startColor;
 
@@ -34,7 +37,7 @@ public class Plot : MonoBehaviour
 
         if (towerToBuild.cost > LevelManager.main.currency)
         {
-            Debug.Log("need more guap");
+            Instantiate(MessagePrefab, canvas);
             return;
         }
 

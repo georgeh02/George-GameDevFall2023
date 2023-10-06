@@ -34,7 +34,6 @@ public class LevelManager : MonoBehaviour
             return true;
         } else
         {
-            Debug.Log("need more guap");
             return false;
         }
     }
