@@ -1004,7 +1004,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SNIPER
+  m_text: SNIPER [150]
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1cd2184ad95db4813aaa323bc0f3ce0f, type: 2}
   m_sharedMaterial: {fileID: 2612841777834679236, guid: 1cd2184ad95db4813aaa323bc0f3ce0f, type: 2}
@@ -3045,7 +3045,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.8867924, b: 0.70839727, a: 0.4862745}
+  m_Color: {r: 0.67058825, g: 0.67058825, b: 0.67058825, a: 0.4862745}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7739,7 +7739,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TURTLE
+  m_text: TURTLE [100]
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1cd2184ad95db4813aaa323bc0f3ce0f, type: 2}
   m_sharedMaterial: {fileID: 2612841777834679236, guid: 1cd2184ad95db4813aaa323bc0f3ce0f, type: 2}
@@ -8138,7 +8138,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: GATTLING
+  m_text: GATTLING [300]
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1cd2184ad95db4813aaa323bc0f3ce0f, type: 2}
   m_sharedMaterial: {fileID: 2612841777834679236, guid: 1cd2184ad95db4813aaa323bc0f3ce0f, type: 2}
