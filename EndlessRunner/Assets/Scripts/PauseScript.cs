@@ -8,7 +8,9 @@ public class PauseScript : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
+    public GameObject gameOverUI;
     public int gameMenuScene;
+    public int gameScene;
     [SerializeField] private float countdownLength = 3.0f;
     public bool countdownActive = false;
     public TextMeshProUGUI countdownText;
@@ -49,9 +51,17 @@ public class PauseScript : MonoBehaviour
     public void LoadMenu()
     {
         pauseMenuUI.SetActive(false);
+        gameOverUI.SetActive(false);
         Time.timeScale = 1f;
         SceneManager.LoadScene(gameMenuScene);
         GameIsPaused = false;
+    }
+
+    public void Retry()
+    {
+        gameOverUI.SetActive(false);
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(gameScene);
     }
 
     public void QuitGame()

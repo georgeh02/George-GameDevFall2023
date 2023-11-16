@@ -10,9 +10,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpForce = 3;
     [SerializeField] private float duckForce = 3;
     [SerializeField] private float Gravity = -20;
-    private int currentLane = 1;
 
+    private int currentLane = 1;
     [SerializeField] private float laneWidth = 2f;
+
+    private float elapsedTime = 0f;
+    [SerializeField] private float speedInterval = 10f;
+    [SerializeField] private float speedAmount = 1f;
+
+    private float velocity = 0f;
 
     private void Start()
     {
@@ -24,6 +30,16 @@ public class PlayerMovement : MonoBehaviour
 
         if (!PauseScript.GameIsPaused)
         {
+            elapsedTime += Time.deltaTime;
+
+            if (elapsedTime >= speedInterval)
+            {
+                moveSpeed += speedAmount;
+
+                //moveSpeed = Mathf.SmoothDamp(moveSpeed, moveSpeed + speedAmount, ref velocity, 1 * Time.deltaTime);
+                elapsedTime = 0f;
+            }
+
             direction.z = moveSpeed;
 
             controller.Move(direction * Time.deltaTime);
@@ -82,8 +98,21 @@ public class PlayerMovement : MonoBehaviour
                 targetPosition += Vector3.right * laneWidth;
             }
 
-            transform.position = Vector3.Lerp(transform.position, targetPosition, 90 * Time.deltaTime);
-            controller.center = controller.center;
+            //transform.position = Vector3.Lerp(transform.position, targetPosition, 90 * Time.deltaTime);
+            //controller.center = controller.center;
+            if (transform.position == targetPosition)
+            {
+                return;
+            }
+            Vector3 diff = targetPosition - transform.position;
+            Vector3 moveDir = diff.normalized * 25 * Time.deltaTime;
+            if (moveDir.sqrMagnitude < diff.sqrMagnitude)
+            {
+                controller.Move(moveDir);
+            } else
+            {
+                controller.Move(diff);
+            }
         }
 
 
@@ -97,5 +126,13 @@ public class PlayerMovement : MonoBehaviour
     private void Duck()
     {
         direction.y -= duckForce;
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.transform.tag == "Obstacle")
+        {
+            PlayerManager.gameOver = true;
+        }
     }
 }
