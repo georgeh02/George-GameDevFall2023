@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private CharacterController controller;
     private Vector3 direction;
-    [SerializeField] private float moveSpeed = 5;
+    public float moveSpeed = 5;
     [SerializeField] private float jumpForce = 3;
     [SerializeField] private float duckForce = 3;
     [SerializeField] private float Gravity = -20;
@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speedInterval = 10f;
     [SerializeField] private float speedAmount = 1f;
 
-    private float velocity = 0f;
+    //private float velocity;
 
     private void Start()
     {
@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(moveSpeed);
 
         if (!PauseScript.GameIsPaused)
         {

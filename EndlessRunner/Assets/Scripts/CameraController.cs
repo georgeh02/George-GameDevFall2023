@@ -5,34 +5,28 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform player;
-    private Vector3 offset;
-    //private Vector3 velocity = Vector3.zero;
+    Vector3 lastPlayerPosition;
 
-    private float elapsedTime = 0f;
-    [SerializeField] private float speedInterval = 10f;
-    //[SerializeField] private float speedAmount = 1f;
 
     void Start()
     {
-        offset = transform.position - player.position;
+        //offset = transform.position - player.position;
+        transform.position = player.position + new Vector3(0, 4, 9);
     }
 
     void LateUpdate()
     {
-        //elapsedTime += Time.deltaTime;
+        //OLD VERSION
+        //Vector3 target = new Vector3(transform.position.x, transform.position.y, player.position.z);
+        //transform.position = Vector3.Lerp(transform.position, target, 10 * Time.deltaTime);
+        //transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, 0.25f);
 
-        //if (elapsedTime >= speedInterval)
-        //{
-        //    //offset.z = Mathf.Lerp(offset.z, offset.z + speedAmount, 10 * Time.deltaTime);
-        //    offset.z = Mathf.Lerp(offset.z, offset.z - (transform.position.z - player.position.z), 10 * Time.deltaTime);
-        //    elapsedTime = 0f;
-        //}
+        Vector3 currentPlayerPosition = player.transform.position;
+        float distanceMoved = currentPlayerPosition.z - lastPlayerPosition.z;
+        lastPlayerPosition = currentPlayerPosition;
 
-        //offset.z = offset.z - (transform.position.z - player.position.z) - 3;
-
-        Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, offset.z + player.position.z);
-
-        transform.position = Vector3.Lerp(transform.position, newPosition, 10 * Time.deltaTime);
-        //transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref velocity, 10 * Time.deltaTime);
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + distanceMoved);
     }
+
+
 }

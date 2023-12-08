@@ -22,7 +22,7 @@ public class PauseScript : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && countdownActive == false)
         {
             if (GameIsPaused)
             {
