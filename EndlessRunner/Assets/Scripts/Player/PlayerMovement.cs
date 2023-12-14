@@ -27,7 +27,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(moveSpeed);
 
         if (!PauseScript.GameIsPaused)
         {

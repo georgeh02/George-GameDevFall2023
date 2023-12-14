@@ -8,8 +8,11 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private Transform tile;
     [SerializeField] private Transform obstacle;
+    [SerializeField] private Transform obstacleShort;
+    [SerializeField] private Transform cave;
     private Vector3 tileSpawnLocation;
     private Vector3 obstacleSpawnLocation;
+    private Transform obstacleToSpawn;
     private bool isSpawningTile = false;
     public float[] rowList = { -12.7f, -9.7f, -6.7f, -3.7f, -0.7f, 2.3f, 5.3f, 8.3f, 11.3f, 14.3f };
     //public float[] rowList = { -12.7f, -6.7f, -0.7f, 5.3f, 11.3f};
@@ -37,7 +40,9 @@ public class LevelGenerator : MonoBehaviour
         tileSpawnLocation.z += 30;
         StartCoroutine(SpawnObstacle(tileSpawnLocation));
         Transform newTile = Instantiate(tile, tileSpawnLocation, tile.rotation);
+        Transform newCave = Instantiate(cave, tileSpawnLocation, tile.rotation);
         StartCoroutine(DestroyObj(newTile));
+        StartCoroutine(DestroyObj(newCave));
 
         yield return null;
         //isSpawningTile = false;
@@ -46,23 +51,29 @@ public class LevelGenerator : MonoBehaviour
     IEnumerator SpawnObstacle(Vector3 tileSpawnLocation)
     {
         List<float> usedRows = new List<float>();
+
+
         obstacleSpawnLocation = tileSpawnLocation;
-        obstacleSpawnLocation.y = obstacle.position.y;
+
 
         float row1 = chooseRow(usedRows);
+        obstacleToSpawn = chooseObstacle();
+        obstacleSpawnLocation.y = obstacleToSpawn.position.y;
         obstacleSpawnLocation.z = tileSpawnLocation.z + row1;
-        obstacleSpawnLocation.y = chooseHeight();
+        //obstacleSpawnLocation.y = chooseHeight();
         usedRows.Add(row1);
         obstacleSpawnLocation.x = -2.5f;
-        Transform newObstacle1 = Instantiate(obstacle, obstacleSpawnLocation, obstacle.rotation);
+        Transform newObstacle1 = Instantiate(obstacleToSpawn, obstacleSpawnLocation, obstacle.rotation);
 
         
         float row2 = chooseRow(usedRows);
+        obstacleToSpawn = chooseObstacle();
+        obstacleSpawnLocation.y = obstacleToSpawn.position.y;
         obstacleSpawnLocation.z = tileSpawnLocation.z + row2;
-        obstacleSpawnLocation.y = chooseHeight();
+        //obstacleSpawnLocation.y = chooseHeight();
         usedRows.Add(row2);
         obstacleSpawnLocation.x = 0f;
-        Transform newObstacle2 = Instantiate(obstacle, obstacleSpawnLocation, obstacle.rotation);
+        Transform newObstacle2 = Instantiate(obstacleToSpawn, obstacleSpawnLocation, obstacle.rotation);
 
         float row3 = chooseRow(usedRows);
 
@@ -71,11 +82,13 @@ public class LevelGenerator : MonoBehaviour
             row3 = chooseRow(usedRows);
         }
 
+        obstacleToSpawn = chooseObstacle();
+        obstacleSpawnLocation.y = obstacleToSpawn.position.y;
         obstacleSpawnLocation.z = tileSpawnLocation.z + row3;
-        obstacleSpawnLocation.y = chooseHeight();
+        //obstacleSpawnLocation.y = chooseHeight();
         usedRows.Add(row3);
         obstacleSpawnLocation.x = 2.5f;
-        Transform newObstacle3 = Instantiate(obstacle, obstacleSpawnLocation, obstacle.rotation);
+        Transform newObstacle3 = Instantiate(obstacleToSpawn, obstacleSpawnLocation, obstacle.rotation);
 
         StartCoroutine(DestroyObj(newObstacle1));
         StartCoroutine(DestroyObj(newObstacle2));
@@ -120,5 +133,14 @@ public class LevelGenerator : MonoBehaviour
     {
         int laneIndex = Random.Range(0, 3);
         return laneList[laneIndex];
+    }
+
+    Transform chooseObstacle()
+    {
+        int rand = Random.Range(0, 2);
+        if (rand == 1) {
+            return obstacle;
+        }
+        return obstacleShort;
     }
 }
